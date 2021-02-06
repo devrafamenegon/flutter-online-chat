@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_chat/text_composer.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'chat_message.dart';
+
 class ChatScreen extends StatefulWidget {
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -51,7 +53,7 @@ class _ChatScreenState extends State<ChatScreen> {
   //função que checa se o usuario está logado, caso não esteja,
   // é chamado a função para ele se logar com o google e só então
   // posteriormente ele pode enviar uma mensagem (texto ou imagem)
-  
+
   void _sendMessage({String text, File imgFile}) async {
     final FirebaseUser user = await _getUser();
 
@@ -113,9 +115,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         itemCount: documents.length,
                         reverse: true,
                         itemBuilder: (context, index) {
-                          return ListTile(
-                            title: Text(documents[index].data['text']),
-                          );
+                          return ChatMessage(documents[index].data, true);
                         }
                       );
                   }
