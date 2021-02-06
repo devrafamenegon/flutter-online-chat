@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_chat/chat_screen.dart';
 
 void main() async {
@@ -16,9 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        iconTheme: IconThemeData(
-          color: Colors.blue
-        ),
+        iconTheme: IconThemeData(color: Colors.blue),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ChatScreen(),

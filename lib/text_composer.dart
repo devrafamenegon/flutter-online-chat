@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TextComposer extends StatefulWidget {
-
   TextComposer(this.sendMessage);
 
   final Function({String text, File imgFile}) sendMessage;
@@ -14,12 +13,11 @@ class TextComposer extends StatefulWidget {
 }
 
 class _TextComposerState extends State<TextComposer> {
-
   final TextEditingController _controller = TextEditingController();
 
   bool _isComposing = false;
 
-  void _reset(){
+  void _reset() {
     _controller.clear();
     setState(() {
       _isComposing = false;
@@ -35,32 +33,36 @@ class _TextComposerState extends State<TextComposer> {
           IconButton(
             icon: Icon(Icons.photo_camera),
             onPressed: () async {
-              final File imgFile = await ImagePicker.pickImage(source: ImageSource.camera);
-              if(imgFile == null) return;
+              final File imgFile =
+                  await ImagePicker.pickImage(source: ImageSource.camera);
+              if (imgFile == null) return;
               widget.sendMessage(imgFile: imgFile);
             },
           ),
           Expanded(
             child: TextField(
               controller: _controller,
-              decoration: InputDecoration.collapsed(hintText: "Enviar uma mensagem"),
-              onChanged: (text){
+              decoration:
+                  InputDecoration.collapsed(hintText: "Enviar uma mensagem"),
+              onChanged: (text) {
                 setState(() {
                   _isComposing = text.isNotEmpty;
                 });
               },
-              onSubmitted: (text){
+              onSubmitted: (text) {
                 widget.sendMessage(text: text);
                 _reset();
               },
             ),
           ),
           IconButton(
-              icon: Icon(Icons.send),
-              onPressed: _isComposing ? (){
-                widget.sendMessage(text: _controller.text);
-                _reset();
-              } : null,
+            icon: Icon(Icons.send),
+            onPressed: _isComposing
+                ? () {
+                    widget.sendMessage(text: _controller.text);
+                    _reset();
+                  }
+                : null,
           ),
         ],
       ),
